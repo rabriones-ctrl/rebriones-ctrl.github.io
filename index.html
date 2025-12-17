@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Center — Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Contact Center Suite</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="#systems">Systems</a></li>
+          <li class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
+          <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="py-4 bg-white border-bottom">
+    <div class="container d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+      <div>
+        <h1 class="h4 mb-1">Dashboard</h1>
+        <p class="text-muted mb-0">Customer Relationship Management • Ticketing System • Agent Performance</p>
+      </div>
+      <div class="mt-3 mt-md-0">
+        <a href="signin.html" class="btn btn-outline-primary me-2">Sign In</a>
+        <a href="signup.html" class="btn btn-primary">Create Account</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container my-4" id="overview">
+
+    <!-- Top quick metrics -->
+    <section class="row g-3 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="card-title mb-2">Active Customers</h6>
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h3 id="metric-customers">2,482</h3>
+                <small class="text-muted">tracked in CRM</small>
+              </div>
+              <div class="text-end">
+                <div class="text-success">+3.4% <small class="text-muted">MoM</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="card-title mb-2">Open Tickets</h6>
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h3 id="metric-tickets">187</h3>
+                <small class="text-muted">needs attention</small>
+              </div>
+              <div class="text-end">
+                <div class="text-warning">+1.1% <small class="text-muted">since yesterday</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="card-title mb-2">Avg. Handle Time (AHT)</h6>
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h3 id="metric-aht">00:06:32</h3>
+                <small class="text-muted">agent performance</small>
+              </div>
+              <div class="text-end">
+                <div class="text-danger">+0.8% <small class="text-muted">vs target</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Systems cards -->
+    <section id="systems" class="row g-3 mb-4">
+
+      <!-- CRM -->
+      <article class="col-12 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <h5 class="card-title mb-0">Customer Relationship Management</h5>
+                <small class="text-muted">Contacts, leads, history</small>
+              </div>
+              <span class="badge bg-success">Online</span>
+            </div>
+
+            <div class="mt-3">
+              <div class="mb-2"><small class="text-muted">New leads (24h)</small>
+                <div class="fw-bold">124</div>
+              </div>
+
+              <div class="mb-3">
+                <small class="text-muted">Profile completion</small>
+                <div class="progress" style="height:10px">
+                  <div id="crm-profile-progress" class="progress-bar bg-info" role="progressbar" style="width: 76%"></div>
+                </div>
+              </div>
+
+              <canvas id="chart-crm" height="120" aria-label="CRM trend"></canvas>
+            </div>
+
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <a href="#" class="btn btn-sm btn-outline-primary">Open CRM</a>
+              <div><a href="#" class="text-decoration-none">View details ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Ticketing -->
+      <article class="col-12 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <h5 class="card-title mb-0">Ticketing System</h5>
+                <small class="text-muted">Queues, SLAs</small>
+              </div>
+              <span class="badge bg-warning text-dark">Degraded</span>
+            </div>
+
+            <div class="mt-3">
+              <div class="mb-2"><small class="text-muted">High priority open</small>
+                <div class="fw-bold text-danger">23</div>
+              </div>
+
+              <div class="mb-3">
+                <small class="text-muted">SLA compliance</small>
+                <div class="progress" style="height:10px">
+                  <div id="ticket-sla-progress" class="progress-bar bg-success" role="progressbar" style="width: 84%"></div>
+                </div>
+              </div>
+
+              <canvas id="chart-tickets" height="120" aria-label="Tickets trend"></canvas>
+            </div>
+
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <a href="#" class="btn btn-sm btn-outline-primary">Open Tickets</a>
+              <div><a href="#" class="text-decoration-none">View queue ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Agent Performance -->
+      <article class="col-12 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <h5 class="card-title mb-0">Agent Performance Dashboard</h5>
+                <small class="text-muted">KPIs, leaderboard</small>
+              </div>
+              <span class="badge bg-primary">Active</span>
+            </div>
+
+            <div class="mt-3">
+              <div class="mb-2"><small class="text-muted">Top agent today</small>
+                <div class="fw-bold">Alex R.</div>
+              </div>
+
+              <div class="mb-3">
+                <small class="text-muted">Average quality score</small>
+                <div class="progress" style="height:10px">
+                  <div id="agent-quality-progress" class="progress-bar bg-secondary" role="progressbar" style="width: 91%"></div>
+                </div>
+              </div>
+
+              <canvas id="chart-agents" height="120" aria-label="Agents trend"></canvas>
+            </div>
+
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <a href="#" class="btn btn-sm btn-outline-primary">Open Performance</a>
+              <div><a href="#" class="text-decoration-none">Leaderboard ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Sample tables / lists below -->
+    <section class="row g-3">
+      <div class="col-12 col-lg-7">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Recent Tickets</h6>
+            <div class="table-responsive">
+              <table class="table table-sm align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Agent</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-tickets">
+                  <tr><td>#T-1023</td><td>Unable to login</td><td>Maria P.</td><td><span class="badge bg-danger">High</span></td><td>Open</td><td>–</td></tr>
+                  <tr><td>#T-1024</td><td>Billing question</td><td>John D.</td><td><span class="badge bg-warning text-dark">Medium</span></td><td>Pending</td><td>Sam</td></tr>
+                  <tr><td>#T-1025</td><td>Feature request</td><td>Katie L.</td><td><span class="badge bg-info text-dark">Low</span></td><td>Closed</td><td>Alex</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard -->
+      <div class="col-12 col-lg-5">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Agent Leaderboard (Today)</h6>
+            <ul class="list-group list-group-flush" id="agent-leaderboard">
+              <li class="list-group-item d-flex justify-content-between align-items-center">Alex R. <span class="badge bg-primary rounded-pill">98</span></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Sam <span class="badge bg-success rounded-pill">92</span></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Priya <span class="badge bg-secondary rounded-pill">89</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-3 bg-white border-top">
+    <div class="container text-muted small">
+      © <span id="year"></span> Contact Center Suite — demo static UI. Replace sample data with your APIs.
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (bundle) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App JS -->
+  <script src="assets/js/app.js"></script>
+  <script>
+    // small page init
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
